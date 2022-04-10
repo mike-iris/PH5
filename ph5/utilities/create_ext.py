@@ -169,6 +169,7 @@ def scan_folder_for_minifile(das, path):
     Scan through all minifiles in the given folder to find the one that
     contains the waveform of the das.
     """
+
     minifiles = [f for f in os.listdir(path)
                  if f.startswith('mini') and f.endswith('.ph5')]
     LOGGER.info("'create_ext' will look through the minifile in path '%s'. "

@@ -1012,7 +1012,7 @@ def run_ph5_to_stationxml(paths, nickname, out_format,
                                         module_uri=uri)
             return inv
     else:
-        raise PH5toStationXMLError("No PH5 experiments were found "
+        raise PH5toStationXMLError("run_ph5_to_stationxml- No PH5 experiments were found "
                                    "under path(s) {0}".format(paths))
 
 

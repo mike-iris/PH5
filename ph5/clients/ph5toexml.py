@@ -722,7 +722,7 @@ def run_ph5_to_event(ph5exml):
         pool.join()
         return networks
     else:
-        raise PH5toEventError("No PH5 experiments were found "
+        raise PH5toEventError("run_ph5_to_event - No PH5 experiments were found "
                               "under basepath(s) {0}".format(basepaths))
 
 

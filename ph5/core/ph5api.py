@@ -10,6 +10,7 @@ import os
 import time
 import re
 import math
+import sys
 
 import numpy as np
 from pyproj import Geod
@@ -226,6 +227,8 @@ class PH5(experiment.ExperimentGroup):
               nickname -> The master ph5 file name, ie. master.ph5
               editmode -> Always False
         '''
+
+        sys.stderr.write("***---*** stderr ph5.core.ph5api path: " + str(path) + "  nickname: " + str(nickname) + "\n")
         if not os.path.exists(os.path.join(path, nickname)):
             raise APIError(0, "PH5 file does not exist: {0}".format(
                 os.path.join(path, nickname)))
@@ -1375,7 +1378,7 @@ class PH5(experiment.ExperimentGroup):
                 stop_epoch=end,
                 sample_rate=sample_rate)
             if not das_t_t:
-                LOGGER.warning("No Das table found for " + das)
+                LOGGER.warning("aaa No Das table found for " + das)
                 return None, None
 
         if not das_t_t:
@@ -1385,7 +1388,7 @@ class PH5(experiment.ExperimentGroup):
         new_das_t = sorted(Das_t, key=lambda k: k['time/epoch_l'])
 
         if not new_das_t:
-            LOGGER.warning("No Das table found for " + das)
+            LOGGER.warning("bbb No Das table found for " + das)
             return None, None
         earliest_epoch = (float(new_das_t[0]['time/epoch_l']) +
                           float(new_das_t[0]
@@ -1427,6 +1430,11 @@ class PH5(experiment.ExperimentGroup):
         if sample_rate is None:
             raise ValueError("Sample rate required for get_availability")
 
+        dasdg = 'Das_g_'+das
+        if dasdg in self.Das_g_names :
+            LOGGER.warning("ccc Das_t_full das: " + str(das) + "  full of das: " + str(self.Das_g_names[dasdg]))
+            ##LOGGER.warning("ccc2 Das_t_full das: " + str(das) + "  full of das: " + str(self.Das_t))
+
         self.read_das_t(das, start, end, reread=True)
 
         if das not in self.Das_t:
@@ -1437,7 +1445,7 @@ class PH5(experiment.ExperimentGroup):
                 stop_epoch=end,
                 sample_rate=sample_rate)
             if not das_t_t:
-                LOGGER.warning("No Das table found for " + das)
+                LOGGER.warning("ccc No Das table found for " + das + "  das_t_t: " + str(das_t_t) +  "  self.Das_t: " + str(self))
                 return None
         if not das_t_t:
             Das_t = filter_das_t(self.Das_t[das]['rows'], component)
@@ -1454,7 +1462,7 @@ class PH5(experiment.ExperimentGroup):
         new_das_t = sorted(Das_t, key=lambda k: k['time/epoch_l'])
 
         if not new_das_t:
-            LOGGER.warning("No Das table found for " + das)
+            LOGGER.warning("ddd No Das table found for " + das)
             return None
 
         gaps = 0

@@ -221,7 +221,7 @@ class PH5Availability(object):
                 sample_rate=sample_rate)
             if not Das_t:
                 LOGGER.warning(
-                    "No Das table found for %s %s for "
+                    "With sample rate, No Das table found for %s %s for "
                     "component: %s, samplerate:%s"
                     % (das, rangestr, component, sample_rate))
                 return -1
@@ -229,7 +229,7 @@ class PH5Availability(object):
             # include all channelnum and sample_rate
             self.ph5.read_das_t(das, s, e, reread=False)
             if das not in self.ph5.Das_t:
-                LOGGER.warning("No Das table found for %s %s"
+                LOGGER.warning("No sample rate, No Das table found for %s %s"
                                % (das, rangestr))
                 return -1
             Das_t = self.ph5.Das_t[das]['rows']
